@@ -5,11 +5,11 @@ import (
 	"io"
 )
 
-const ProtocolVersion = 578
+const ProtocolVersion = 741
 const MaxPacketSize = 128 * 1024
 const MaxPacketID = 256
 const CompressThreshold = 256
-var GameVersion = ServerStatusVersion{"1.15.2", ProtocolVersion}
+var GameVersion = ServerStatusVersion{"1.16.1", ProtocolVersion}
 
 type EntityID int32
 type VarInt int32
@@ -116,21 +116,21 @@ func newPlayPacket(packet_id VarInt, direction Direction) (packet Packet) {
 		}
 	} else {
 		switch packet_id {
-		case 0x3B:
-			packet = new(RespawnPacketCB)
-		case 0x1B:
-			packet = new(KickPacketCB)
-		case 0x26:
-			packet = new(JoinGamePacketCB)
+		case 0x39:
+			packet = new(RespawnPacketCB) //TODO new respawn packet
 		case 0x19:
+			packet = new(KickPacketCB)
+		case 0x24:
+			packet = new(JoinGamePacketCB) //TODO new join game
+		case 0x17:
 			packet = new(PluginMessagePacketCB)
-		case 0x1F:
+		case 0x1D:
 			packet = new(GameStateChangePacketCB)
+		case 0x0E:
+			packet = new(ChatMessagePacketCB) //TODO new chat packet
 		case 0x0F:
-			packet = new(ChatMessagePacketCB)
-		case 0x11:
 			packet = new(TabCompletePacketCB) //TODO Przyjrzeć się temu pakietowi
-		case 0x34:
+		case 0x32:
 			packet = new(PlayerListItemPacketCB)
 		case 0x4A:
 			packet = new(ScoreboardObjectivePacketCB)
