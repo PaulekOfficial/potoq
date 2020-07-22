@@ -117,17 +117,17 @@ func newPlayPacket(packet_id VarInt, direction Direction) (packet Packet) {
 	} else {
 		switch packet_id {
 		case 0x39:
-			packet = new(RespawnPacketCB) //TODO new respawn packet
+			packet = new(RespawnPacketCB)
 		case 0x19:
 			packet = new(KickPacketCB)
 		case 0x24:
-			packet = new(JoinGamePacketCB) //TODO new join game
+			packet = new(JoinGamePacketCB)
 		case 0x17:
 			packet = new(PluginMessagePacketCB)
 		case 0x1D:
 			packet = new(GameStateChangePacketCB)
 		case 0x0E:
-			packet = new(ChatMessagePacketCB) //TODO new chat packet
+			packet = new(ChatMessagePacketCB)
 		case 0x0F:
 			packet = new(TabCompletePacketCB) //TODO Przyjrzeć się temu pakietowi
 		case 0x32:
