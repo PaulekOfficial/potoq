@@ -106,26 +106,33 @@ func (cmd *ReconnectCommand) Execute(handler *Handler) (err error) {
 	// return
 }
 
+//TODO zobaczymy co z tym bedzie
 func SendDimensionSwitch(w packets.PacketWriter, join *packets.JoinGamePacketCB) (err error) {
 	// TODO: bungee tutaj jeszcze czysci scoreboard, bossbary i chyba tabliste aktualizuje, ale mozliwe ze to jest zwiazane z jego wlasnym api a nie spigot
 
 	// send world change to client
 	temp_dim := &packets.RespawnPacketCB{
-		Dimension: 1,
+		Dimension: join.Dimension,
+		WorldName: join.WorldName,
 		GameMode:  join.GameMode,
-		LevelType: join.LevelType,
-	}
-	if join.Dimension == 1 {
-		temp_dim.Dimension = -1
+		PreviousGameMode: join.PreviousGameMode,
+		HashedSeed: join.HashedSeed,
+		IsDebug: join.IsDebug,
+		IsFlat: join.IsFlat,
+		CopyMetadata: false,
 	}
 	w.WritePacket(temp_dim, false)
 	w.WritePacket(join, false)
 
 	w.WritePacket(&packets.RespawnPacketCB{
 		Dimension: join.Dimension,
-		HashedSeed: join.HashedSeed,
+		WorldName: join.WorldName,
 		GameMode:  join.GameMode,
-		LevelType: join.LevelType,
+		PreviousGameMode: join.PreviousGameMode,
+		HashedSeed: join.HashedSeed,
+		IsDebug: join.IsDebug,
+		IsFlat: join.IsFlat,
+		CopyMetadata: false,
 	}, false)
 
 	// send gamemode change ; pokazuje 'your gamemode has been changed' na chacie, ale inaczej cos sie pierdoli z nieznanego powodu i jest wieczny survival; TODO: sprawdzic to

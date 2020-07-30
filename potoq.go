@@ -6,7 +6,6 @@ import (
 	"io/ioutil"
 	"net"
 	"sync"
-
 	"github.com/Craftserve/potoq/packets"
 
 	"github.com/sirupsen/logrus"

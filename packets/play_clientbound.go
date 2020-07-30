@@ -91,7 +91,7 @@ type JoinGamePacketCB struct {
 	PreviousGameMode    uint8
 	World               VarInt
 	WorldNames	        []string `max_length:"32767"`
-	DimensionCodec      struct{} //TODO przyjrzec sie temu
+	DimensionCodec      interface{} //TODO przyjrzec sie temu
 	Dimension           string `max_length:"32767"`
 	WorldName           string `max_length:"32767"`
 	MaxPlayers          uint8

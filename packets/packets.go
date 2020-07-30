@@ -5,7 +5,7 @@ import (
 	"io"
 )
 
-const ProtocolVersion = 741
+const ProtocolVersion = 736
 const MaxPacketSize = 128 * 1024
 const MaxPacketID = 256
 const CompressThreshold = 256
